@@ -1,0 +1,36 @@
+{
+  "name": "integration-tests-jest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "@typescript-eslint/eslint-plugin": "^4.27.0",
+    "@typescript-eslint/parser": "^4.27.0",
+    "eslint": "^7.28.0",
+    "jest": "^27.0.4",
+    "jest-html-reporters": "^2.1.6",
+    "pactum": "^3.0.16",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.3.2"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf ./dist ./output && mkdirp ./dist ./output",
+    "lint": "yarn run eslint \"**/**.[jt]s?(x)\"",
+    "lint:report": "yarn run eslint \"**/**.[jt]s?(x)\" -o output/eslint.html -f html",
+    "jest:config": "jest --config ./jest.config.js",
+    "test": "yarn run jest:config",
+    "ci": "yarn run clean; yarn run lint:report; yarn run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ugioni/integration-tests-jest.git"
+  },
+  "author": "leandro.ugioni",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ugioni/integration-tests-jest/issues"
+  },
+  "homepage": "https://github.com/ugioni/integration-tests-jest#readme"
+}
