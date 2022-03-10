@@ -4,24 +4,24 @@
   "description": "",
   "main": "index.js",
   "devDependencies": {
-    "@types/jest": "^26.0.23",
-    "@typescript-eslint/eslint-plugin": "^4.27.0",
-    "@typescript-eslint/parser": "^4.27.0",
-    "eslint": "^7.28.0",
-    "jest": "^27.0.4",
-    "jest-html-reporters": "^2.1.6",
-    "pactum": "^3.0.16",
-    "ts-jest": "^27.0.3",
-    "typescript": "^4.3.2"
+    "@types/jest": "^27.4.1",
+    "@typescript-eslint/eslint-plugin": "^5.14.0",
+    "@typescript-eslint/parser": "^5.14.0",
+    "eslint": "^8.10.0",
+    "jest": "^27.5.1",
+    "jest-html-reporters": "^3.0.6",
+    "pactum": "^3.1.4",
+    "ts-jest": "^27.1.3",
+    "typescript": "^4.6.2"
   },
   "scripts": {
     "build": "tsc",
     "clean": "rimraf ./dist ./output && mkdirp ./dist ./output",
-    "lint": "yarn run eslint \"**/**.[jt]s?(x)\"",
-    "lint:report": "yarn run eslint \"**/**.[jt]s?(x)\" -o output/eslint.html -f html",
+    "lint": "eslint \"**/**.[jt]s?(x)\"",
+    "lint:report": "eslint \"**/**.[jt]s?(x)\" -o output/eslint.html -f html",
     "jest:config": "jest --config ./jest.config.js",
-    "test": "yarn run jest:config",
-    "ci": "yarn run clean; yarn run lint:report; yarn run test"
+    "test": "npm run jest:config",
+    "ci": "npm run clean; npm run lint:report; npm run test"
   },
   "repository": {
     "type": "git",
