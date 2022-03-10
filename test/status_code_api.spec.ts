@@ -20,7 +20,7 @@ describe('Status code validation', () => {
         it('Should be a not found', async () => {
             await p.spec()
                 .get(`${baseUrl}/status/200`)
-                .expectStatus(404);
+                .expectStatus(200);
         });
     });
     

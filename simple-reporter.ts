@@ -7,7 +7,7 @@ export const SimpleReporter = {
 
     async afterSpec(spec: Reporter.SpecData): Promise<void> {
         const { start, end, request, response } = spec;
-        await addMsg(JSON.stringify({ start, end, request, response }, undefined, 4));
+        //await addMsg(JSON.stringify({ start, end, request, response }, undefined, 4));
     },
 
     

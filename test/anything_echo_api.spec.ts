@@ -54,7 +54,7 @@ describe('Echo validation', () => {
         });
     });
 
-    describe('Verifying endpoints using GET method', () => {
+   describe('Verifying endpoints using GET method', () => {
         it('Should return only the default data', async () => {
             await p.spec()
                 .get(`${baseUrl}/anything`)
