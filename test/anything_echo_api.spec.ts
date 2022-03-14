@@ -46,7 +46,7 @@ describe('Echo validation', () => {
                     {
                         form: {
                             id: '1',
-                            status: 'SUCCESS'
+                            status: 'FAIL'
                         },
                         method: 'POST'
                     }
