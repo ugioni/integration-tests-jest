@@ -7,10 +7,10 @@ export const SimpleReporter = {
 
     async afterSpec(spec: Reporter.SpecData): Promise<void> {
         const { start, end, request, response } = spec;
-        //await addMsg(JSON.stringify({ start, end, request, response }, undefined, 4));
+        await addMsg({ message: JSON.stringify({ start, end, request, response }, undefined, 4), context: null });
     },
 
-    
+
     afterStep(step: Record<string, unknown>): void {// eslint-disable-line @typescript-eslint/no-unused-vars
         // required by contract.
     },
