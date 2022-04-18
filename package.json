@@ -7,6 +7,8 @@
     "@types/jest": "^27.4.1",
     "@typescript-eslint/eslint-plugin": "^5.19.0",
     "@typescript-eslint/parser": "^5.19.0",
+    "rimraf": "^3.0.2",
+    "mkdirp": "^1.0.4",
     "eslint": "^8.13.0",
     "jest": "^27.5.1",
     "jest-html-reporters": "^3.0.6",
@@ -21,7 +23,7 @@
     "lint:report": "eslint \"**/**.[jt]s?(x)\" -o output/eslint.html -f html",
     "jest:config": "jest --config ./jest.config.js",
     "test": "npm run jest:config",
-    "ci": "npm run clean; npm run lint:report; npm run test"
+    "ci": "npm run clean && npm run lint:report && npm run test"
   },
   "repository": {
     "type": "git",
