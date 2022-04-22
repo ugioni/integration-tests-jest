@@ -6,6 +6,9 @@
 
 # Getting Started
 
+### Pactum docs:
+ - [PactumJS](https://pactumjs.github.io/welcome)
+
 ### Prerequisites:
  - NodeJS `v12.22.1`
 
