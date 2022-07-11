@@ -7,6 +7,11 @@
     "@types/jest": "^28.1.4",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
     "mkdirp": "^1.0.4",
     "eslint": "^8.19.0",
@@ -19,11 +24,13 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf ./dist ./output && mkdirp ./dist ./output",
+    "format": "prettier --write \"**/**.[jt]s?(x)\"",
+    "verify": "prettier --check \"**/**.[jt]s?(x)\"",
     "lint": "eslint \"**/**.[jt]s?(x)\"",
     "lint:report": "eslint \"**/**.[jt]s?(x)\" -o output/eslint.html -f html",
     "jest:config": "jest --config ./jest.config.js",
     "test": "npm run jest:config",
-    "ci": "npm run clean && npm run lint:report && npm run test"
+    "ci": "npm run clean && npm run format && npm run verify && npm run lint:report && npm run test"
   },
   "repository": {
     "type": "git",
