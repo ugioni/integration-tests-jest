@@ -7,7 +7,7 @@
 # Getting Started
 
 ### Pactum docs:
- - [PactumJS](https://pactumjs.github.io/welcome)
+ - [PactumJS](https://pactumjs.github.io/api/api/table-of-contents.html)
 
 ### Prerequisites:
  - NodeJS `v12.22.1`
