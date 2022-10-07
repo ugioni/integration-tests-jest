@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { addMsg } from 'jest-html-reporters/helper';
 import { Interaction } from 'pactum/src/exports/mock';
 import * as Reporter from 'pactum/src/exports/reporter';
@@ -14,17 +15,14 @@ export const SimpleReporter = {
   },
 
   afterStep(step: Record<string, unknown>): void {
-    // eslint-disable-line @typescript-eslint/no-unused-vars
     // required by contract.
   },
 
   afterTest(test: Record<string, unknown>): void {
-    // eslint-disable-line @typescript-eslint/no-unused-vars
     // required by contract
   },
 
   afterInteraction(interaction: Interaction): void {
-    // eslint-disable-line @typescript-eslint/no-unused-vars
     // required by contract
   },
 
