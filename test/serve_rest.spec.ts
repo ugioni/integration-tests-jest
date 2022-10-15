@@ -8,6 +8,7 @@ describe('ServeRest API', () => {
   let idUsuario = '';
   let idProduto = '';
   let emailUsuario = '';
+  const timeout = 60000;
   const p = pactum;
   const rep = SimpleReporter;
   const baseUrl = 'https://serverest.dev';
@@ -18,7 +19,7 @@ describe('ServeRest API', () => {
     idUsuario = await p
       .spec()
       .post(`${baseUrl}/usuarios`)
-      .withRequestTimeout(60000)
+      .withRequestTimeout(timeout)
       .withHeaders('monitor', false)
       .withJson({
         nome: faker.internet.userName(),
@@ -32,7 +33,7 @@ describe('ServeRest API', () => {
     emailUsuario = await p
       .spec()
       .get(`${baseUrl}/usuarios/${idUsuario}`)
-      .withRequestTimeout(60000)
+      .withRequestTimeout(timeout)
       .withHeaders('monitor', false)
       .expectStatus(StatusCodes.OK)
       .returns('email');
@@ -42,13 +43,17 @@ describe('ServeRest API', () => {
     token = await p
       .spec()
       .post(`${baseUrl}/login`)
-      .withRequestTimeout(60000)
+      .withRequestTimeout(timeout)
       .withHeaders('monitor', false)
       .withJson({
         email: `${emailUsuario}`,
         password: '123456789'
       })
       .expectStatus(StatusCodes.OK)
+      .expectBodyContains('Login realizado com sucesso')
+      .expectJsonSchema({
+        type: 'object'
+      })
       .returns('authorization');
   });
 
@@ -57,7 +62,7 @@ describe('ServeRest API', () => {
       idProduto = await p
         .spec()
         .post(`${baseUrl}/produtos`)
-        .withRequestTimeout(60000)
+        .withRequestTimeout(timeout)
         .withHeaders('Authorization', token)
         .withHeaders('monitor', false)
         .withJson({
@@ -67,13 +72,26 @@ describe('ServeRest API', () => {
           quantidade: 10
         })
         .expectStatus(StatusCodes.CREATED)
+        .expectBodyContains('Cadastro realizado com sucesso')
+        .expectJsonSchema({
+          type: 'object',
+          properties: {
+            message: {
+              type: 'string'
+            },
+            _id: {
+              type: 'string'
+            }
+          },
+          required: ['message', '_id']
+        })
         .returns('_id');
     });
     it('Busca o novo produto cadastrado', async () => {
       await p
         .spec()
         .get(`${baseUrl}/produtos/${idProduto}`)
-        .withRequestTimeout(60000)
+        .withRequestTimeout(timeout)
         .withHeaders('Authorization', token)
         .withHeaders('monitor', false)
         .expectStatus(StatusCodes.OK);
@@ -85,7 +103,7 @@ describe('ServeRest API', () => {
       await p
         .spec()
         .post(`${baseUrl}/carrinhos`)
-        .withRequestTimeout(60000)
+        .withRequestTimeout(timeout)
         .withHeaders('Authorization', token)
         .withHeaders('monitor', false)
         .withJson({
@@ -97,16 +115,18 @@ describe('ServeRest API', () => {
           ]
         })
         .expectStatus(StatusCodes.CREATED)
+        .expectBodyContains('Cadastro realizado com sucesso')
         .returns('_id');
     });
     it('Conclui a compra e exclui o carrinho', async () => {
       await p
         .spec()
         .delete(`${baseUrl}/carrinhos/concluir-compra`)
-        .withRequestTimeout(60000)
+        .withRequestTimeout(timeout)
         .withHeaders('Authorization', token)
         .withHeaders('monitor', false)
-        .expectStatus(StatusCodes.OK);
+        .expectStatus(StatusCodes.OK)
+        .expectBodyContains('Registro excluído com sucesso');
     });
   });
 
