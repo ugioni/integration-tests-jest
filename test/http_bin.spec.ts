@@ -1,4 +1,5 @@
 import pactum from 'pactum';
+import { StatusCodes } from 'http-status-codes';
 import { SimpleReporter } from '../simple-reporter';
 
 describe('Echo validation', () => {
@@ -18,7 +19,7 @@ describe('Echo validation', () => {
           id: 1,
           status: 'SUCCESS'
         })
-        .expectStatus(200)
+        .expectStatus(StatusCodes.OK)
         .expectJsonLike({
           json: {
             id: 1,
@@ -57,6 +58,26 @@ describe('Echo validation', () => {
           args: {},
           method: 'GET'
         });
+    });
+  });
+
+  describe('Verifying status code from endpoints', () => {
+    it('Should be a bad request', async () => {
+      await p.spec().get(`${baseUrl}/status/400`).expectStatus(400);
+    });
+
+    it('Should be a not found', async () => {
+      await p.spec().get(`${baseUrl}/status/200`).expectStatus(200);
+    });
+  });
+
+  describe('Verifying status code from endpoints using another scope', () => {
+    it('Should be a teapot', async () => {
+      await p
+        .spec()
+        .get(`${baseUrl}/status/418`)
+        .expectStatus(418)
+        .expectBodyContains('teapot');
     });
   });
 });

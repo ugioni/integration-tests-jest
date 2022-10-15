@@ -13,7 +13,7 @@ module.exports = {
         filename: 'report.html',
         pageTitle: 'JestJS + PactumJS',
         logoImgPath: './assets/jest-logo.png',
-        expand: true,
+        expand: false,
         openReport: false
       }
     ]
