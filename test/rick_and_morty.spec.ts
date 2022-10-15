@@ -1,4 +1,5 @@
 import pactum from 'pactum';
+import { StatusCodes } from 'http-status-codes';
 import { SimpleReporter } from '../simple-reporter';
 
 describe('Rick and Morty API', () => {
@@ -11,11 +12,11 @@ describe('Rick and Morty API', () => {
 
   describe('Character', () => {
     it('GET ALL', async () => {
-      await p.spec().get(`${baseUrl}/character`).expectStatus(200);
+      await p.spec().get(`${baseUrl}/character`).expectStatus(StatusCodes.OK);
     });
 
     it('GET Rick', async () => {
-      await p.spec().get(`${baseUrl}/character/1`).expectStatus(200);
+      await p.spec().get(`${baseUrl}/character/1`).expectStatus(StatusCodes.OK);
     });
 
     it('GET Rick response time', async () => {
@@ -26,7 +27,7 @@ describe('Rick and Morty API', () => {
       await p
         .spec()
         .get(`${baseUrl}/character/xxx`)
-        .expectStatus(500)
+        .expectStatus(StatusCodes.INTERNAL_SERVER_ERROR)
         .expectBodyContains('Hey! you must provide an id');
     });
   });

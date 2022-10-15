@@ -37,7 +37,7 @@ describe('Echo validation', () => {
           id: '1',
           status: 'FAIL'
         })
-        .expectStatus(200)
+        .expectStatus(StatusCodes.OK)
         .expectJsonLike({
           form: {
             id: '1',
@@ -53,7 +53,7 @@ describe('Echo validation', () => {
       await p
         .spec()
         .get(`${baseUrl}/anything`)
-        .expectStatus(200)
+        .expectStatus(StatusCodes.OK)
         .expectJsonLike({
           args: {},
           method: 'GET'
@@ -63,11 +63,14 @@ describe('Echo validation', () => {
 
   describe('Verifying status code from endpoints', () => {
     it('Should be a bad request', async () => {
-      await p.spec().get(`${baseUrl}/status/400`).expectStatus(400);
+      await p
+        .spec()
+        .get(`${baseUrl}/status/400`)
+        .expectStatus(StatusCodes.BAD_REQUEST);
     });
 
     it('Should be a not found', async () => {
-      await p.spec().get(`${baseUrl}/status/200`).expectStatus(200);
+      await p.spec().get(`${baseUrl}/status/200`).expectStatus(StatusCodes.OK);
     });
   });
 
@@ -76,7 +79,7 @@ describe('Echo validation', () => {
       await p
         .spec()
         .get(`${baseUrl}/status/418`)
-        .expectStatus(418)
+        .expectStatus(StatusCodes.IM_A_TEAPOT)
         .expectBodyContains('teapot');
     });
   });

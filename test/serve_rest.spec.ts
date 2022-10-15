@@ -1,6 +1,7 @@
 import pactum from 'pactum';
 import { SimpleReporter } from '../simple-reporter';
 import { faker } from '@faker-js/faker';
+import { StatusCodes } from 'http-status-codes';
 
 describe('ServeRest API', () => {
   let token = '';
@@ -25,7 +26,7 @@ describe('ServeRest API', () => {
         password: '123456789',
         administrador: 'true'
       })
-      .expectStatus(201)
+      .expectStatus(StatusCodes.CREATED)
       .returns('_id');
 
     emailUsuario = await p
@@ -33,7 +34,7 @@ describe('ServeRest API', () => {
       .get(`${baseUrl}/usuarios/${idUsuario}`)
       .withRequestTimeout(60000)
       .withHeaders('monitor', false)
-      .expectStatus(200)
+      .expectStatus(StatusCodes.OK)
       .returns('email');
   });
 
@@ -47,7 +48,7 @@ describe('ServeRest API', () => {
         email: `${emailUsuario}`,
         password: '123456789'
       })
-      .expectStatus(200)
+      .expectStatus(StatusCodes.OK)
       .returns('authorization');
   });
 
@@ -65,7 +66,7 @@ describe('ServeRest API', () => {
           descricao: faker.commerce.productDescription(),
           quantidade: 10
         })
-        .expectStatus(201)
+        .expectStatus(StatusCodes.CREATED)
         .returns('_id');
     });
     it('Busca o novo produto cadastrado', async () => {
@@ -75,7 +76,7 @@ describe('ServeRest API', () => {
         .withRequestTimeout(60000)
         .withHeaders('Authorization', token)
         .withHeaders('monitor', false)
-        .expectStatus(200);
+        .expectStatus(StatusCodes.OK);
     });
   });
 
@@ -95,7 +96,7 @@ describe('ServeRest API', () => {
             }
           ]
         })
-        .expectStatus(201)
+        .expectStatus(StatusCodes.CREATED)
         .returns('_id');
     });
     it('Conclui a compra e exclui o carrinho', async () => {
@@ -105,7 +106,7 @@ describe('ServeRest API', () => {
         .withRequestTimeout(60000)
         .withHeaders('Authorization', token)
         .withHeaders('monitor', false)
-        .expectStatus(200);
+        .expectStatus(StatusCodes.OK);
     });
   });
 
