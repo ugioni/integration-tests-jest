@@ -11,7 +11,7 @@ module.exports = {
       {
         publicPath: './output',
         filename: 'report.html',
-        pageTitle: 'JestJS + PactumJS',
+        pageTitle: 'Integration Tests with Jest and Pactum',
         logoImgPath: './assets/jest-logo.png',
         expand: false,
         openReport: false
