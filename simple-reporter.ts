@@ -22,10 +22,6 @@ export const SimpleReporter = {
     // required by contract
   },
 
-  afterInteraction(interaction: Interaction): void {
-    // required by contract
-  },
-
   end(): void | Promise<void> {
     // required by contract
   }
