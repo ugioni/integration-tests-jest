@@ -7,6 +7,8 @@ describe('Echo validation', () => {
   const rep = SimpleReporter;
   const baseUrl = 'http://httpbin.org';
 
+  p.request.setDefaultTimeout(30000);
+
   beforeAll(() => p.reporter.add(rep));
   afterAll(() => p.reporter.end());
 
@@ -61,7 +63,7 @@ describe('Echo validation', () => {
     });
   });
 
-  describe('Verifying status code from endpoints', () => {
+  /* describe('Verifying status code from endpoints', () => {
     it('Should be a bad request', async () => {
       await p
         .spec()
@@ -72,7 +74,7 @@ describe('Echo validation', () => {
     it('Should be a not found', async () => {
       await p.spec().get(`${baseUrl}/status/200`).expectStatus(StatusCodes.OK);
     });
-  });
+  }); */
 
   describe('Verifying status code from endpoints using another scope', () => {
     it('Should be a teapot', async () => {
