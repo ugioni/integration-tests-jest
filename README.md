@@ -16,7 +16,7 @@
 
 Inside of the project folder run:
 
- 1. `npm install`
+ 1. `npm install --save-dev`
  1. `npm test`
 
 After that you should see a `./output` folder with some `HTML` reports.

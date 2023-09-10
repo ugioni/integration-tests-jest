@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { addMsg } from 'jest-html-reporters/helper';
-import { Interaction } from 'pactum/src/exports/mock';
 import * as Reporter from 'pactum/src/exports/reporter';
 
 export const SimpleReporter = {
