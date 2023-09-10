@@ -5,7 +5,7 @@ import { SimpleReporter } from '../simple-reporter';
 describe('Echo validation', () => {
   const p = pactum;
   const rep = SimpleReporter;
-  const baseUrl = 'http://httpbin.org';
+  const baseUrl = 'https://httpbin.org';
 
   p.request.setDefaultTimeout(30000);
 
@@ -63,7 +63,7 @@ describe('Echo validation', () => {
     });
   });
 
-  /* describe('Verifying status code from endpoints', () => {
+  describe('Verifying status code from endpoints', () => {
     it('Should be a bad request', async () => {
       await p
         .spec()
@@ -74,7 +74,7 @@ describe('Echo validation', () => {
     it('Should be a not found', async () => {
       await p.spec().get(`${baseUrl}/status/200`).expectStatus(StatusCodes.OK);
     });
-  }); */
+  });
 
   describe('Verifying status code from endpoints using another scope', () => {
     it('Should be a teapot', async () => {
