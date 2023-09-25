@@ -2,7 +2,7 @@ import pactum from 'pactum';
 import { StatusCodes } from 'http-status-codes';
 import { SimpleReporter } from '../simple-reporter';
 
-describe('Rick and Morty API', () => {
+describe.skip('Rick and Morty API', () => {
   const p = pactum;
   const rep = SimpleReporter;
   const baseUrl = 'https://rickandmortyapi.com/api';

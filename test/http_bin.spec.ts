@@ -2,7 +2,7 @@ import pactum from 'pactum';
 import { StatusCodes } from 'http-status-codes';
 import { SimpleReporter } from '../simple-reporter';
 
-describe('Echo validation', () => {
+describe.skip('Echo validation', () => {
   const p = pactum;
   const rep = SimpleReporter;
   const baseUrl = 'https://httpbin.org';
