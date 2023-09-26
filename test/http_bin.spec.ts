@@ -1,8 +1,9 @@
 import pactum from 'pactum';
 import { StatusCodes } from 'http-status-codes';
 import { SimpleReporter } from '../simple-reporter';
+import data from '../data/data.json';
 
-describe.skip('Echo validation', () => {
+describe('Echo validation', () => {
   const p = pactum;
   const rep = SimpleReporter;
   const baseUrl = 'https://httpbin.org';
@@ -17,10 +18,7 @@ describe.skip('Echo validation', () => {
       await p
         .spec()
         .post(`${baseUrl}/anything`)
-        .withJson({
-          id: 1,
-          status: 'SUCCESS'
-        })
+        .withJson(data.sucesso)
         .expectStatus(StatusCodes.OK)
         .expectJsonLike({
           json: {
@@ -76,7 +74,7 @@ describe.skip('Echo validation', () => {
     });
   });
 
-  describe('Verifying status code from endpoints using another scope', () => {
+  describe.skip('Verifying status code from endpoints using another scope', () => {
     it('Should be a teapot', async () => {
       await p
         .spec()

@@ -1,14 +1,6 @@
 {
-  "usuario": {
-    "nome": "ugioni",
-    "email": "a@b.com.br",
-    "password": "123456789",
-    "administrador": "true"
-  },
-  "usuario2": {
-    "nome": "testes",
-    "email": "a@b.com.br",
-    "password": "123456789",
-    "administrador": "true"
+  "sucesso": {
+    "id": 1,
+    "status": "SUCCESS"
   }
 }

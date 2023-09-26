@@ -8,7 +8,7 @@ describe('ServeRest API', () => {
   let idUsuario = '';
   let idProduto = '';
   let emailUsuario = '';
-  let pass = '';
+  const password = faker.random.numeric(9);
   const p = pactum;
   const rep = SimpleReporter;
   const baseUrl = 'https://serverest.dev';
@@ -17,7 +17,6 @@ describe('ServeRest API', () => {
 
   beforeAll(async () => {
     p.reporter.add(rep);
-    pass = faker.random.numeric(9);
     idUsuario = await p
       .spec()
       .post(`${baseUrl}/usuarios`)
@@ -25,7 +24,7 @@ describe('ServeRest API', () => {
       .withJson({
         nome: faker.internet.userName(),
         email: faker.internet.email(),
-        password: pass,
+        password: password,
         administrador: 'true'
       })
       .expectStatus(StatusCodes.CREATED)
@@ -47,7 +46,7 @@ describe('ServeRest API', () => {
       .withHeaders('monitor', false)
       .withJson({
         email: `${emailUsuario}`,
-        password: pass
+        password: password
       })
       .expectStatus(StatusCodes.OK)
       .expectBodyContains('Login realizado com sucesso')
