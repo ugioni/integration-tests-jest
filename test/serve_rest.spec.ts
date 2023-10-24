@@ -8,7 +8,7 @@ describe('ServeRest API', () => {
   let idUsuario = '';
   let idProduto = '';
   let emailUsuario = '';
-  const password = faker.random.numeric(9);
+  const password = faker.string.numeric(9);
   const p = pactum;
   const rep = SimpleReporter;
   const baseUrl = 'https://serverest.dev';
@@ -64,7 +64,7 @@ describe('ServeRest API', () => {
         .withHeaders('monitor', false)
         .withJson({
           email: faker.internet.email(),
-          password: faker.random.numeric(5)
+          password: faker.string.numeric(5)
         })
         .expectStatus(StatusCodes.UNAUTHORIZED)
         .expectBodyContains('Email e/ou senha inválidos');

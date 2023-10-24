@@ -74,7 +74,7 @@ describe('Echo validation', () => {
     });
   });
 
-  describe.skip('Verifying status code from endpoints using another scope', () => {
+  describe('Verifying status code from endpoints using another scope', () => {
     it('Should be a teapot', async () => {
       await p
         .spec()
