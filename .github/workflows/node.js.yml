@@ -13,11 +13,11 @@ jobs:
     name: Run Integration Tests
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3.5.2
-    - name: Use Node.js 18
-      uses: actions/setup-node@v2.5.2
+    - uses: actions/checkout@v4.1.1
+    - name: Use Node.js 21
+      uses: actions/setup-node@v4.0.0
       with:
-        node-version: 18
+        node-version: 21
         cache: 'npm'
     - run: npm install      
     - run: npm test
@@ -26,15 +26,15 @@ jobs:
     name: Run SonarCloud
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.5.2
+      - uses: actions/checkout@v4.1.1
         with:
           fetch-depth: 0  
       - name: Setup Node.js environment
-        uses: actions/setup-node@v2.5.2
+        uses: actions/setup-node@v4.0.0
         with:
-          node-version: 18 
+          node-version: 21 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v1.9.1      
+        uses: SonarSource/sonarcloud-github-action@v2.0.2      
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

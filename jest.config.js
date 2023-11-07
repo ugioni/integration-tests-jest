@@ -3,7 +3,7 @@ module.exports = {
   testEnvironment: 'node',
   testMatch: ['**/test/**/*.[jt]s?(x)'],
   verbose: true,
-  testTimeout: 90000,
+  testTimeout: 30000,
   reporters: [
     'default',
     [
