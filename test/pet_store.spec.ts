@@ -15,7 +15,6 @@ describe('Pet Store API', () => {
 
   beforeAll(async () => {
     p.reporter.add(rep);
-
     await p
       .spec()
       .post(`${baseUrl}/user`)
@@ -30,7 +29,9 @@ describe('Pet Store API', () => {
       })
       .expectStatus(StatusCodes.OK)
       .expectBodyContains('200');
+  });
 
+  beforeEach(async () => {
     await p
       .spec()
       .get(`${baseUrl}/user/login`)
@@ -42,7 +43,7 @@ describe('Pet Store API', () => {
       .expectBodyContains('logged in user session:');
   });
 
-  describe('PET', () => {
+  describe('Pet - Everything about your Pets', () => {
     it('cadastro do PET', async () => {
       await p
         .spec()
@@ -68,7 +69,7 @@ describe('Pet Store API', () => {
     });
   });
 
-  describe('ORDER', () => {
+  describe('Store - Access to Petstore orders', () => {
     it('cadastro do Order', async () => {
       await p
         .spec()
