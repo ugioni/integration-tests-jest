@@ -144,6 +144,7 @@ describe('ServeRest API', () => {
         .expectStatus(StatusCodes.CREATED)
         .expectBodyContains('Cadastro realizado com sucesso');
     });
+
     it('carrinho inválido', async () => {
       await p
         .spec()
@@ -153,6 +154,7 @@ describe('ServeRest API', () => {
         .expectStatus(StatusCodes.BAD_REQUEST)
         .expectBodyContains('Carrinho não encontrado');
     });
+
     it('Conclui a compra e exclui o carrinho', async () => {
       await p
         .spec()
