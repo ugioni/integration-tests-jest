@@ -8,6 +8,7 @@ describe('ServeRest API', () => {
   let idUsuario = '';
   let idProduto = '';
   let emailUsuario = '';
+  const descProdutoDuplicado = faker.commerce.productName();
   const password = faker.string.numeric(9);
   const p = pactum;
   const rep = SimpleReporter;
@@ -100,6 +101,7 @@ describe('ServeRest API', () => {
         })
         .returns('_id');
     });
+
     it('Busca o novo produto cadastrado', async () => {
       await p
         .spec()
@@ -108,6 +110,7 @@ describe('ServeRest API', () => {
         .withHeaders('monitor', false)
         .expectStatus(StatusCodes.OK);
     });
+
     it('produto sem token válido', async () => {
       await p
         .spec()
@@ -123,6 +126,37 @@ describe('ServeRest API', () => {
         .expectBodyContains(
           'Token de acesso ausente, inválido, expirado ou usuário do token não existe mais'
         );
+    });
+
+    it('Validar produtos com descrição duplicada', async () => {
+      await p
+        .spec()
+        .post(`${baseUrl}/produtos`)
+        .withHeaders('Authorization', token)
+        .withHeaders('monitor', false)
+        .withJson({
+          nome: descProdutoDuplicado,
+          preco: 500,
+          descricao: faker.commerce.productDescription(),
+          quantidade: 10
+        })
+        .expectStatus(StatusCodes.CREATED)
+        .expectBodyContains('Cadastro realizado com sucesso')
+        .returns('_id');
+
+      await p
+        .spec()
+        .post(`${baseUrl}/produtos`)
+        .withHeaders('Authorization', token)
+        .withHeaders('monitor', false)
+        .withJson({
+          nome: descProdutoDuplicado,
+          preco: 500,
+          descricao: faker.commerce.productDescription(),
+          quantidade: 10
+        })
+        .expectStatus(StatusCodes.BAD_REQUEST)
+        .expectBodyContains('Já existe produto com esse nome');
     });
   });
 
