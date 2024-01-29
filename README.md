@@ -28,6 +28,7 @@ Inside of the project folder run:
 After that you should see a `./output` folder with some `HTML` reports.
 
 ### Docs to Api under tests:
+ - [json placeholder](https://jsonplaceholder.typicode.com/)
  - [http bin](http://httpbin.org/)
  - [rick and morty api](https://rickandmortyapi.com/documentation/#rest)
  - [Petstore](https://petstore.swagger.io/#/) 
