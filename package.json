@@ -28,6 +28,7 @@
     "format": "prettier --write \"**/**.[jt]s?(x)\"",
     "verify": "prettier --check \"**/**.[jt]s?(x)\"",
     "eslint": "eslint \"**/**.[jt]s?(x)\" -o output/eslint.html -f html",
+    "scenario": "jest aula_pratica.spec.ts --config ./jest.config.js",
     "test": "jest --config ./jest.config.js",
     "ci": "npm run clean && npm run format && npm run verify && npm run eslint && npm run test"
   },
