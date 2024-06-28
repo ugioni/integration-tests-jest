@@ -33,7 +33,8 @@ describe('Sistema - ServeRest', () => {
           password: password,
           administrador: 'true'
         })
-        .expectStatus(StatusCodes.CREATED).returns('_id');
+        .expectStatus(StatusCodes.CREATED)
+        .returns('_id');
     });
 
     it('Buscar usuário', async () => {
@@ -53,7 +54,8 @@ describe('Sistema - ServeRest', () => {
           email: email,
           password: password
         })
-        .expectStatus(StatusCodes.OK).returns('authorization');
+        .expectStatus(StatusCodes.OK)
+        .returns('authorization');
     });
 
     it('Login inválido', async () => {
