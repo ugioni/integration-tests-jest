@@ -16,7 +16,7 @@
  - [PactumJS](https://pactumjs.github.io/api/api/table-of-contents.html)
 
 ### Prerequisites:
- - NodeJS `v18`
+ - NodeJS `v20`
 
 ### How to run?
 
