@@ -1,32 +1,53 @@
 import pactum from 'pactum';
 import { StatusCodes } from 'http-status-codes';
 import { SimpleReporter } from '../simple-reporter';
-import data from '../data/data.json';
 
-describe.skip('Deck of cards', () => {
+describe('Deck of cards', () => {
   const p = pactum;
   const rep = SimpleReporter;
-  const baseUrl = 'https://';
+  const baseUrl = 'https://deckofcardsapi.com/api';
+  let deckId = '';
 
   p.request.setDefaultTimeout(30000);
 
   beforeAll(() => p.reporter.add(rep));
   afterAll(() => p.reporter.end());
 
-  describe.skip('Verifying endpoints using POST method', () => {
-    it('Should return the same data as the json sent', async () => {
+  describe('DECK', () => {
+    it('New Deck', async () => {
+      deckId = await p
+        .spec()
+        .post(`${baseUrl}/deck/new/`)
+        .expectStatus(StatusCodes.OK)
+        .expectJsonSchema({
+          $schema: 'http://json-schema.org/draft-04/schema#',
+          type: 'object',
+          properties: {
+            success: {
+              type: 'boolean'
+            },
+            deck_id: {
+              type: 'string'
+            },
+            remaining: {
+              type: 'integer'
+            },
+            shuffled: {
+              type: 'boolean'
+            }
+          },
+          required: ['success', 'deck_id', 'remaining', 'shuffled']
+        })
+        .returns('deck_id');
+    });
+
+    it('Shuffle Deck', async () => {
       await p
         .spec()
-        .post(`${baseUrl}/anything`)
-        .withJson(data.sucesso)
+        .post(`${baseUrl}/deck/${deckId}/shuffle/`)
         .expectStatus(StatusCodes.OK)
-        .expectJsonLike({
-          json: {
-            id: 1,
-            status: 'SUCCESS'
-          },
-          method: 'POST'
-        });
+        .expectBodyContains('52')
+        .expectJsonLike({ shuffled: true });
     });
   });
 });

@@ -176,7 +176,20 @@ describe('ServeRest API', () => {
           ]
         })
         .expectStatus(StatusCodes.CREATED)
-        .expectBodyContains('Cadastro realizado com sucesso');
+        .expectBodyContains('Cadastro realizado com sucesso')
+        .expectJsonSchema({
+          $schema: 'http://json-schema.org/draft-04/schema#',
+          type: 'object',
+          properties: {
+            message: {
+              type: 'string'
+            },
+            _id: {
+              type: 'string'
+            }
+          },
+          required: ['message', '_id']
+        });
     });
 
     it('carrinho inválido', async () => {
