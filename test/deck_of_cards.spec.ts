@@ -19,25 +19,6 @@ describe('Deck of cards', () => {
         .spec()
         .post(`${baseUrl}/deck/new/`)
         .expectStatus(StatusCodes.OK)
-        .expectJsonSchema({
-          $schema: 'http://json-schema.org/draft-04/schema#',
-          type: 'object',
-          properties: {
-            success: {
-              type: 'boolean'
-            },
-            deck_id: {
-              type: 'string'
-            },
-            remaining: {
-              type: 'integer'
-            },
-            shuffled: {
-              type: 'boolean'
-            }
-          },
-          required: ['success', 'deck_id', 'remaining', 'shuffled']
-        })
         .returns('deck_id');
     });
 

@@ -5,7 +5,7 @@ import { StatusCodes } from 'http-status-codes';
 
 describe('Pet Store API', () => {
   const password = faker.string.numeric(9);
-  const userName = faker.internet.userName();
+  const userName = faker.internet.username();
   const dogName = faker.animal.dog();
   const p = pactum;
   const rep = SimpleReporter;

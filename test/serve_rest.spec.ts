@@ -23,7 +23,7 @@ describe('ServeRest API', () => {
       .post(`${baseUrl}/usuarios`)
       .withHeaders('monitor', false)
       .withJson({
-        nome: faker.internet.userName(),
+        nome: faker.internet.username(),
         email: faker.internet.email(),
         password: password,
         administrador: 'true'
