@@ -28,6 +28,7 @@ Inside of the project folder run:
 After that you should see a `./output` folder with some `HTML` reports.
 
 ### Docs to Api under tests: 
+ - [Toolshop API](https://api.practicesoftwaretesting.com/api/documentation)
  - [Deck of Cards](https://deckofcardsapi.com/)
  - [JSON placeholder](https://jsonplaceholder.typicode.com/)
  - [http bin](http://httpbin.org/)
