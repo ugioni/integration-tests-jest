@@ -67,6 +67,30 @@ describe('Pet Store API', () => {
         .expectBodyContains(dogName)
         .returns('id');
     });
+
+    it('atualizar dados do PET', async () => {
+      await p
+        .spec()
+        .put(`${baseUrl}/pet`)
+        .withJson({
+          category: {
+            id: faker.number.int(32),
+            name: faker.word.words(3)
+          },
+          name: 'Cachorrinho do Guichard',
+          photoUrls: ['string'],
+          tags: [
+            {
+              id: 0,
+              name: 'string'
+            }
+          ],
+          status: 'available'
+        })
+        .expectStatus(StatusCodes.OK)
+        .expectBodyContains('Cachorrinho do Guichard')
+        .expectResponseTime(5000);
+    });
   });
 
   describe('Store - Access to Petstore orders', () => {

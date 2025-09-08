@@ -7,6 +7,7 @@ describe('ServeRest API', () => {
   let token = '';
   let idUsuario = '';
   let idProduto = '';
+  let idProduto2 = '';
   let emailUsuario = '';
   const descProdutoDuplicado = faker.commerce.productName();
   const password = faker.string.numeric(9);
@@ -18,6 +19,7 @@ describe('ServeRest API', () => {
 
   beforeAll(async () => {
     p.reporter.add(rep);
+
     idUsuario = await p
       .spec()
       .post(`${baseUrl}/usuarios`)
@@ -84,6 +86,35 @@ describe('ServeRest API', () => {
           preco: 500,
           descricao: faker.commerce.productDescription(),
           quantidade: 10
+        })
+        .expectStatus(StatusCodes.CREATED)
+        .expectBodyContains('Cadastro realizado com sucesso')
+        .expectJsonSchema({
+          type: 'object',
+          properties: {
+            message: {
+              type: 'string'
+            },
+            _id: {
+              type: 'string'
+            }
+          },
+          required: ['message', '_id']
+        })
+        .returns('_id');
+    });
+
+    it('Cadastro um novo produto', async () => {
+      idProduto2 = await p
+        .spec()
+        .post(`${baseUrl}/produtos`)
+        .withHeaders('Authorization', token)
+        .withHeaders('monitor', false)
+        .withJson({
+          nome: faker.commerce.productName(),
+          preco: 1600,
+          descricao: faker.commerce.productDescription(),
+          quantidade: 30
         })
         .expectStatus(StatusCodes.CREATED)
         .expectBodyContains('Cadastro realizado com sucesso')
@@ -172,6 +203,10 @@ describe('ServeRest API', () => {
             {
               idProduto: `${idProduto}`,
               quantidade: 10
+            },
+            {
+              idProduto: `${idProduto2}`,
+              quantidade: 12
             }
           ]
         })
