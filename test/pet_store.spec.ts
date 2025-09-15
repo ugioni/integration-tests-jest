@@ -139,6 +139,15 @@ describe('Pet Store API', () => {
           ]
         });
     });
+
+    it('get do Inventory', async () => {
+      await p
+        .spec()
+        .get(`${baseUrl}/store/inventory`)
+        .expectStatus(StatusCodes.OK)
+        .expectBodyContains(`sold`)
+        .expectHeaderContains('content-type', 'application/json');
+    });
   });
 
   afterAll(() => p.reporter.end());
