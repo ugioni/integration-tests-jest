@@ -7,12 +7,14 @@ describe('Aula Pratica 01', () => {
   const p = pactum;
   const rep = SimpleReporter;
   const baseUrl = 'https://api.practicesoftwaretesting.com';
+
   const email = faker.internet.email();
   const senha = faker.internet.password({ length: 10, prefix: 'Aa@1' });
 
   let token = '';
+  let brandId = '';
 
-  p.request.setDefaultTimeout(120000);
+  p.request.setDefaultTimeout(60000);
 
   beforeAll(async () => {
     p.reporter.add(rep);
@@ -52,50 +54,61 @@ describe('Aula Pratica 01', () => {
       .returns('access_token');
   });
 
-  describe('Invoices', () => {
-    it('Invoice Not Found', async () => {
-      await p
+  describe('Brands', () => {
+    it('Cadastrar nova Brand', async () => {
+      brandId = await p
         .spec()
         .withHeaders({ Authorization: `Bearer ${token}` })
-        .post(`${baseUrl}/invoices`)
+        .post(`${baseUrl}/brands`)
         .withJson({
-          billing_street: faker.location.streetAddress(),
-          billing_city: faker.location.city(),
-          billing_state: faker.location.state(),
-          billing_country: faker.location.country(),
-          billing_postal_code: faker.location.zipCode(),
-          payment_method: 'bank-transfer',
-          cart_id: faker.finance.creditCardNumber(),
-          payment_details: {
-            bank_name: faker.company.name(),
-            account_name: faker.finance.accountName(),
-            account_number: faker.finance.accountNumber()
-          }
+          name: faker.number.int() + '',
+          slug: faker.number.int() + ''
         })
-        .expectStatus(StatusCodes.NOT_FOUND);
+        .expectStatus(StatusCodes.CREATED)
+        .returns('id');
     });
 
-    it('Invoice metodo não permitido', async () => {
+    it('Brand não processada', async () => {
       await p
         .spec()
         .withHeaders({ Authorization: `Bearer ${token}` })
-        .delete(`${baseUrl}/invoices`)
-        .expectStatus(StatusCodes.METHOD_NOT_ALLOWED);
-    });
-
-    it('Invoice metodo não permitido', async () => {
-      await p
-        .spec()
-        .withHeaders({ Authorization: `Bearer ${token}` })
-        .post(`${baseUrl}/invoices`)
+        .post(`${baseUrl}/brands`)
         .withJson({
-          billing_street: faker.location.streetAddress(),
-          billing_city: faker.location.city(),
-          billing_state: faker.location.state(),
-          billing_country: faker.location.country(),
-          billing_postal_code: faker.location.zipCode()
+          name: '@',
+          slug: '#'
         })
         .expectStatus(StatusCodes.UNPROCESSABLE_ENTITY);
+    });
+
+    it('Editar nova Brand', async () => {
+      await p
+        .spec()
+        .withHeaders({ Authorization: `Bearer ${token}` })
+        .put(`${baseUrl}/brands/${brandId}`)
+        .withJson({
+          name: faker.number.int() + 'editado',
+          slug: faker.number.int() + 'editado'
+        })
+        .expectStatus(StatusCodes.OK);
+    });
+
+    it('buscar nova Brand editada', async () => {
+      await p
+        .spec()
+        .withHeaders({ Authorization: `Bearer ${token}` })
+        .get(`${baseUrl}/brands/${brandId}`)
+        .expectStatus(StatusCodes.OK);
+    });
+
+    it('buscar Brand editada pelo search', async () => {
+      await p
+        .spec()
+        .withHeaders({ Authorization: `Bearer ${token}` })
+        .get(`${baseUrl}/brands/search`)
+        .withQueryParams({
+          q: 'editado'
+        })
+        .expectStatus(StatusCodes.OK);
     });
   });
 });
