@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import { SimpleReporter } from '../simple-reporter';
 import { faker } from '@faker-js/faker';
 
-describe('Aula Pratica 01', () => {
+describe('practice software testing', () => {
   const p = pactum;
   const rep = SimpleReporter;
   const baseUrl = 'https://api.practicesoftwaretesting.com';
